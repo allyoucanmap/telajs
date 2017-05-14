@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>cube</title>
+    <script language="javascript" type="text/javascript" src="../../dist/tela.js"></script>
+    <style>
+
+        body {
+            margin: 0;
+        }
+
+        .tela-canvas {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <canvas id="tela" class="tela-canvas" ></canvas>
+    <script language="javascript" type="text/javascript">
+
+          tela.set('tela');
+          tela.resize();
+
+          var cube = tela.ent({
+              mod: tela.mod({ ty: 'CUB' })
+          });
+
+          tela.play(function () {
+              cube.rx(cube.rx() + 1.0);
+              cube.ry(cube.ry() + 1.0);
+          });
+
+    </script>
+</body>
+
+</html>
