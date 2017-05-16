@@ -55,7 +55,17 @@ const coordinates = (p, ext) => {
     return [lon, lat];
 };
 
+const position = (p, ext) => {
+    const pseudoFrame = ext.get('frame').pseudo;
+    const width = ext.get('width');
+    const height = ext.get('height');
+    const x = map(p[0], 0, width, pseudoFrame[0][0], pseudoFrame[1][0]);
+    const y = map(p[1], height, 0, pseudoFrame[0][1], pseudoFrame[1][1]);
+    return [x, y];
+};
+
 module.exports = {
     update,
-    coordinates
+    coordinates,
+    position
 };

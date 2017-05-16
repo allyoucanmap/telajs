@@ -1,12 +1,14 @@
 
 const {
     TILE_SIDE_PX,
+    resolution,
     wgs84
 } = require('./utils');
 
 const {
     update,
-    coordinates
+    coordinates,
+    position
 } = require('./hybrid');
 
 const geovector = {
@@ -18,11 +20,15 @@ const geovector = {
         },
         frame: {
             pseudo: [[0.0, 0.0], [0.0, 0.0]],
-            wgs84: [[0.0, 0.0], [0.0, 0.0]],
-            tile: [[0, 0], [0, 0]]
+            tile: [[0, 0], [0, 0]],
+            wgs84: [[0.0, 0.0], [0.0, 0.0]]
         },
         layers: [],
-        position: [0.0, 0.0],
+        position: {
+            pseudo: [0.0, 0.0],
+            px: [0, 0],
+            wgs84: [0.0, 0.0]
+        },
         resolution: 0.0,
         scale: 0.0,
         sensitivity: 2,
@@ -64,7 +70,9 @@ const geovector = {
         now: () => {} // not implemented yet
     },
     resize: {
-        now: () => {} // not implemented yet
+        now: (ext, tela) => {
+            update(ext, tela);
+        }
     },
     events: {
         click: () => {},
@@ -75,13 +83,20 @@ const geovector = {
             ext.get('center').wgs84 = wgs84([center[0] + p[0] * sens * res, center[1] + p[1] * sens * res]);
         },
         move: (p, ext) => {
-            const position = coordinates(p, ext);
-            ext.set('position', position);
+            ext.get('position').px = p;
+            ext.get('position').pseudo = position(p, ext);
+            ext.get('position').wgs84 = coordinates(p, ext);
         },
         scroll: (ev, p, ext) => {
             const zooms = ext.get('zoom');
             const zoom = zooms.now === zooms.max && ev > 0 || zooms.now === zooms.min && ev < 0 ? zooms.now : zooms.now + ev;
+            const width = ext.get('width');
+            const height = ext.get('height');
+            const delta = [width / 2 - p[0], - (height / 2 - p[1])];
+            const res = resolution(0, zoom);
+            const pos = position(p, ext);
             ext.get('zoom').now = zoom;
+            ext.get('center').wgs84 = wgs84([pos[0] + delta[0] * res, pos[1] + delta[1] * res]);
         }
     }
 };

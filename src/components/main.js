@@ -146,7 +146,7 @@ let tela;
         return 'stop';
     };
 
-    T.prototype.resize = () => {
+    T.prototype.resize = (f) => {
         if (!T.prototype._.started) {
             return null;
         }
@@ -169,6 +169,14 @@ let tela;
                         });
                     }
                 }
+                if (f) {
+                    f();
+                }
+                T.prototype._.extensions.forEach((ext) => {
+                    if (ext.data.resize && ext.data.resize.now) {
+                        ext.data.resize.now(ext, tela);
+                    }
+                });
             }, 500);
             T.prototype._.e.resize = true;
         }, false);
