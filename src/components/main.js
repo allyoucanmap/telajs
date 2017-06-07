@@ -198,36 +198,85 @@ let tela;
     T.prototype.Event = require('./event');
 
     tela = new T();
-
+    /**
+     * Represents a book.
+     * @namespace .sha()
+     * @example tela.ent();
+     */
     tela.sha = (o) => {
         return new tela.Shader(T.prototype._, o);
     };
-
+    /**
+     * Represents a book.
+     * @namespace .mod()
+     * @example tela.ent();
+     */
     tela.mod = (o) => {
         return new tela.Model(T.prototype._, o);
     };
-
+    /**
+     * Generate an Entity object with
+     * <b>tela.ent( options )</b>
+     * @namespace .ent()
+     * @example
+     * <script language="javascript" type="text/javascript" src="./tela.js"></script>
+     * <canvas id="tela" class="tela-canvas" ></canvas>
+     * <script language="javascript" type="text/javascript">
+     *
+     *  tela.set('tela');
+     *  tela.resize();
+     *
+     *  var cube = tela.ent({
+     *    mod: tela.mod({ ty: 'CUB' })
+     *  });
+     *
+     *  tela.play(function () {
+     *    cube.rx(cube.rx() + 1.0);
+     *    cube.ry(cube.ry() + 1.0);
+     *  });
+     *
+     * </script>
+     */
     tela.ent = (o) => {
         return new tela.Entity(T.prototype._, o);
     };
-
+    /**
+     * Represents a book.
+     * @namespace .cam()
+     * @example tela.ent();
+     */
     tela.cam = (o) => {
         return new tela.Camera(T.prototype._, o);
     };
-
+    /**
+     * Represents a book.
+     * @namespace .lig()
+     * @example tela.ent();
+     */
     tela.lig = (o) => {
         return new tela.Light(T.prototype._, o);
     };
-
+    /**
+     * Represents a book.
+     * @namespace .ren()
+     * @example tela.ent();
+     */
     tela.ren = (o) => {
         return new tela.Render(T.prototype._, o);
     };
-
-
+    /**
+     * Represents a book.
+     * @namespace .ext()
+     * @example tela.ent();
+     */
     tela.ext = (ext) => {
         return new tela.Extension(T.prototype._, ext);
     };
-
+    /**
+     * Represents a book.
+     * @namespace .on()
+     * @example tela.ent();
+     */
     tela.on = (ty, f) => {
         return new tela.Event(T.prototype._, ty, f);
     };

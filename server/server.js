@@ -9,19 +9,34 @@ const app = express();
 const compiler = webpack(config);
 
 app.use(webpackDevMiddleware(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
+    hot: true,
+    filename: 'tela.js',
+    publicPath: 'http://localhost:3000/assets/',
+    stats: {
+        colors: true
+    },
+    historyApiFallback: true
 }));
 
-app.use(webpackHotMiddleware(compiler));
+app.use(webpackHotMiddleware(compiler, {
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000
+}));
 
-app.use(express.static('./dist'));
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-type, Accept');
+    next();
+});
 
-app.use('/', function(req, res) {
-    res.sendFile(path.resolve('src/index.html'));
+app.use(express.static('./www'));
+
+app.use('http://localhost:3000/', function(req, res) {
+    res.sendFile(path.resolve('www/index.html'));
 });
 
 app.listen(port, function(error) {
     if (error) throw error;
     console.warn("Express server listening on port", port);
 });
+

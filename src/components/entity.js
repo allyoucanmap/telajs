@@ -46,7 +46,13 @@ const Entity = function(p, options = {}) {
     p.entities.push(this);
     return this;
 };
-
+/**
+ * function of the
+ * @function mod
+ * @instance
+ * @memberof .ent()
+ * @param {object} mod - tela.mod()
+ */
 Entity.prototype.mod = function(mod) {
     if (mod) {
         if (!mod.t) {
@@ -58,7 +64,16 @@ Entity.prototype.mod = function(mod) {
     }
     return this.model;
 };
-
+/**
+ * set the material of the entity
+ * @function ma
+ * @instance
+ * @memberof .ent()
+ * @param {number} material - from -1 to 9
+ * @example
+ * var cube = tela.ent();
+ * cube.ma(1);
+ */
 Entity.prototype.ma = function(ma) {
     if (ma) {
         this.material = ma;
@@ -245,6 +260,11 @@ Entity.prototype.va = function(v) {
 
 Entity.prototype.de = function() {
     return 0;
+};
+
+Entity.prototype.ko = function() {
+    this.model.budelete();
+    return this.value;
 };
 
 module.exports = Entity;

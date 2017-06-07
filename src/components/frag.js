@@ -11,6 +11,7 @@ module.exports = "" +
 
 "varying vec2 vT;" +
 
+"varying vec3 vC;" +
 "varying vec3 suN;" +
 "varying vec3 toL;" +
 
@@ -19,7 +20,14 @@ module.exports = "" +
 "}" +
 
 "void main(void) {" +
-  "vec4 color = vec4(diffuse, 1.0);" +
+  "vec4 color;" +
+
+  "if (vC.x >= 0.0 && vC.x <= 1.0) {" +
+    "color = vec4(vC, 1.0);" +
+  "} else {" +
+    "color = vec4(diffuse, 1.0);" +
+  "}" +
+
   "float brightness = 1.0;" +
   "if (material == 0) {" +
     "brightness = max(dot(normalize(suN), normalize(toL)), 0.4);" +

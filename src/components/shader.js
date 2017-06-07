@@ -32,6 +32,9 @@ const Shader = function(p, optns = {}) {
     }, {
         pos: 2,
         name: 'n'
+    }, {
+        pos: 3,
+        name: 'c'
     }];
 
     this.uniforms = {

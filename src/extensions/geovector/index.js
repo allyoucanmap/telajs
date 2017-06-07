@@ -1,29 +1,64 @@
+const style = require('./style');
 
 const {
-    TILE_SIDE_PX,
+    // TILE_SIDE_PX,
     resolution,
-    wgs84
+    wgs84,
+    path
 } = require('./utils');
 
 const {
     update,
     coordinates,
-    position
+    position,
+    updateLayers
 } = require('./hybrid');
 
 const geovector = {
     name: 'geovector',
     settings: {
+        style,
         center: {
             pseudo: [0.0, 0.0],
-            wgs84: [9.0, 45.0]
+            wgs84: [10.5039, 43.8440]
         },
         frame: {
             pseudo: [[0.0, 0.0], [0.0, 0.0]],
             tile: [[0, 0], [0, 0]],
             wgs84: [[0.0, 0.0], [0.0, 0.0]]
         },
-        layers: [],
+        layers: [{
+            url: 'http://localhost:8080/geoserver/gwc/service/wmts',
+            name: 'osm:roads',
+            gridset: 'EPSG:900913',
+            format: 'application/json;type=geojson',
+            type: 'wmts',
+            tiles: [],
+            color: [0.5, 0.6, 0.6],
+            mat: 1
+        },
+        {
+            url: 'http://localhost:8080/geoserver/gwc/service/wmts',
+            name: 'osm:water',
+            gridset: 'EPSG:900913',
+            format: 'application/json;type=geojson',
+            type: 'wmts',
+            tiles: [],
+            color: [0.3, 0.6, 0.6],
+            mat: 1
+        },
+        {
+            url: 'http://localhost:8080/geoserver/gwc/service/wmts',
+            name: 'osm:buildings',
+            gridset: 'EPSG:900913',
+            format: 'application/json;type=geojson',
+            type: 'wmts',
+            tiles: [],
+            color: [0.0, 1.0, 1.0],
+            mat: 1
+            // 0.5, 0.5, 0.6 violet
+            // 0.4, 0.5, 0.1 green
+        }],
         position: {
             pseudo: [0.0, 0.0],
             px: [0, 0],
@@ -34,32 +69,53 @@ const geovector = {
         sensitivity: 2,
         visible: [],
         zoom: {
-            now: 14,
+            now: 15,
             max: 19,
-            min: 0
+            min: 15
         }
     },
     set: {
         now: (ext, tela) => {
-            const cam = tela.cam({ ty: 'o'});
+            const cam = tela.cam({ ty: 'p', fa: 100000000});
+            const sun = tela.lig();
             ext.set('cam', cam);
+            ext.set('sun', sun);
 
             update(ext, tela);
 
-            /* testing tile size and movements with rectangle model */
-            const center = ext.get('center').pseudo;
-            const rect = tela.mod({ ty: 'REC' });
-            const res = ext.get('resolution');
-            tela.ent({ ma: -1, c: [1.0, 0.0, 1.0], mod: rect, p: [center[0], center[1], 1], s: TILE_SIDE_PX * res * 0.99 });
+            let layers = ext.get('layers');
+
+            layers.forEach((layer) => {
+                layer.path = path(layer);
+            });
+
+            updateLayers(ext, tela);
         }
     },
     play: {
         before: () => {},
         now: (ext, tela) => {
-            if (tela.get('e').scroll
-            || tela.get('e').drag) {
+            if (tela.get('e').scroll) {
+                update(ext, tela);
+                updateLayers(ext, tela);
+            }
+
+            if (tela.get('e').drag) {
                 update(ext, tela);
             }
+
+            if (tela.get('e').dragend) {
+                updateLayers(ext, tela);
+            }
+
+            /* let layers = ext.get('layers');
+
+            layers.forEach((layer) => {
+                layer.tiles.forEach((t) => {
+                    // t.ent.ry(45);
+                    console.log(t.ent.sz(t.ent.sz() + 0.1));
+                });
+            }); */
         },
         after: () => {}
     },
@@ -72,6 +128,7 @@ const geovector = {
     resize: {
         now: (ext, tela) => {
             update(ext, tela);
+            updateLayers(ext, tela);
         }
     },
     events: {

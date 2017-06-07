@@ -5,6 +5,7 @@ module.exports = "" +
 "attribute vec3 p;" +
 "attribute vec2 t;" +
 "attribute vec3 n;" +
+"attribute vec3 c;" +
 
 "uniform mat4 mvp;" +
 "uniform mat4 mmx;" +
@@ -18,9 +19,11 @@ module.exports = "" +
 "varying vec2 vT;" +
 "varying vec3 suN;" +
 "varying vec3 toL;" +
+"varying vec3 vC;" +
 
 "void main(void) {" +
   "vT = t;" +
+  "vC = c;" +
   "if (line == 0) {" +
     "vec3 wP = (mmx * vec4(p, 1.0)).xyz;" +
     "suN = (mmx * vec4(n, 0.0)).xyz;" +
