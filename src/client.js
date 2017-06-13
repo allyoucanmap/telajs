@@ -14,3 +14,7 @@ tela.on('move');
 tela.on('drag');
 
 console.warn(tela);
+
+if (module.hot) {
+    module.hot.accept();
+}

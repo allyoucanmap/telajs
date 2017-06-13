@@ -7,7 +7,8 @@ const Model = function(p, options = {}) {
     let opts = {
         raw: 'raw',
         str: 'structure',
-        ty: 'type'
+        ty: 'type',
+        cv: 'cv'
     };
 
     if (!p.started) {
@@ -25,7 +26,8 @@ const Model = function(p, options = {}) {
         i: [],
         p: [],
         t: [],
-        n: []
+        n: [],
+        c: []
     };
 
     this.bu = {
@@ -36,18 +38,28 @@ const Model = function(p, options = {}) {
     };
 
     for (let o in opts) {
-        if (options[o]) {
+        if (options[o] !== undefined) {
             this[opts[o]] = options[o];
         }
     }
 
     switch (this.type) {
+        case 'WGL':
+            this.vs = {
+                i: [0, 1, 2],
+                p: [0.0, p.SQRT3 / 3, 0.0, -0.5, -p.SQRT3 / 6, 0.0, 0.5, -p.SQRT3 / 6, 0.0],
+                t: [0.5, p.SQRT3 / 2, 0.0, 0.0, 1.0, 0.0],
+                n: [0, 0, 1, 0, 0, 1, 0, 0, 1],
+                c: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+            };
+            break;
         case 'EQU':
             this.vs = {
                 i: [0, 1, 2],
                 p: [0.0, p.SQRT3 / 3, 0.0, -0.5, -p.SQRT3 / 6, 0.0, 0.5, -p.SQRT3 / 6, 0.0],
                 t: [0.5, p.SQRT3 / 2, 0.0, 0.0, 1.0, 0.0],
-                n: [0, 0, 1, 0, 0, 1, 0, 0, 1]
+                n: [0, 0, 1, 0, 0, 1, 0, 0, 1],
+                c: [-1, -1, -1, -1, -1, -1, -1, -1, -1]
             };
             break;
         case 'TRI':
@@ -55,7 +67,8 @@ const Model = function(p, options = {}) {
                 i: [0, 1, 2],
                 p: [-0.5, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, 0.5, 0.0],
                 t: [0, 1, 0, 0, 1, 1],
-                n: [0, 0, 1, 0, 0, 1, 0, 0, 1]
+                n: [0, 0, 1, 0, 0, 1, 0, 0, 1],
+                c: [-1, -1, -1, -1, -1, -1, -1, -1, -1]
             };
             break;
         case 'REC':
@@ -63,7 +76,8 @@ const Model = function(p, options = {}) {
                 i: [0, 1, 3, 3, 1, 2],
                 p: [-0.5, 0.5, 0.0, -0.5, -0.5, 0.0, 0.5, -0.5, 0.0, 0.5, 0.5, 0.0],
                 t: [0, 1, 0, 0, 1, 0, 1, 1],
-                n: [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1]
+                n: [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1],
+                c: [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
             };
             break;
         case 'CUB':
@@ -71,7 +85,8 @@ const Model = function(p, options = {}) {
                 i: [0, 1, 3, 3, 1, 2, 4, 5, 7, 7, 5, 6, 8, 9, 11, 11, 9, 10, 12, 13, 15, 15, 13, 14, 16, 17, 19, 19, 17, 18, 20, 21, 23, 23, 21, 22],
                 p: [-0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5],
                 t: [0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1],
-                n: [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0]
+                n: [0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0],
+                c: [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
             };
             break;
         case 'STR':
@@ -79,10 +94,10 @@ const Model = function(p, options = {}) {
             break;
         case 'PLL':
             this.line = 1;
-            this.vs = Model.polylines(this.raw);
+            this.vs = Model.polylines(this.raw, this.cv);
             break;
         case 'PLG':
-            this.vs = Model.polygons(this.raw);
+            this.vs = Model.polygons(this.raw, this.cv);
             break;
         default:
     }
@@ -100,7 +115,7 @@ Model.prototype.size = function() {
 };
 
 Model.prototype.ent = function(e) {
-    if (e) {
+    if (e !== undefined) {
         this.entities.push(e);
     }
     return this.entities;
@@ -112,6 +127,9 @@ Model.prototype.bucreate = function() {
     this.bu.p = this.gl.createBuffer();
     this.bu.t = this.gl.createBuffer();
     this.bu.n = this.gl.createBuffer();
+    if (this.vs.c !== undefined) {
+        this.bu.c = this.gl.createBuffer();
+    }
 };
 
 Model.prototype.bubind = function() {
@@ -123,6 +141,10 @@ Model.prototype.bubind = function() {
     this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.vs.t), this.gl.STATIC_DRAW);
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.bu.n);
     this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.vs.n), this.gl.STATIC_DRAW);
+    if (this.vs.c !== undefined) {
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.bu.c);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.vs.c), this.gl.STATIC_DRAW);
+    }
 };
 
 Model.prototype.budelete = function() {
@@ -131,6 +153,10 @@ Model.prototype.budelete = function() {
     this.gl.deleteBuffer(this.bu.p);
     this.gl.deleteBuffer(this.bu.t);
     this.gl.deleteBuffer(this.bu.n);
+    if (this.vs.c !== undefined) {
+        this.gl.deleteBuffer(this.bu.c);
+        this.bu.c = null;
+    }
     this.bu.i = null;
     this.bu.p = null;
     this.bu.t = null;
@@ -143,15 +169,23 @@ Model.prototype.destroy = function() {
     }
 };
 
-Model.polylines = function(rw) {
+Model.polylines = function(rw, cv) {
     let vs = {
         i: [],
         p: [],
         t: [],
-        n: []
+        n: [],
+        c: []
     };
     for (let i = 0, k = 0; i < rw.length; i++) {
         for (let j = 0; j < rw[i].length - 1; j++, k += 4) {
+            let ca;
+            let cb;
+            if (cv) {
+                ca = cv[i][j]; // color
+                cb = cv[i][j + 1]; // color
+            }
+
             let a = rw[i][j]; // point a
             let b = rw[i][j + 1]; // point b
             let r = perpendicular(a, b, 1); // right side
@@ -182,17 +216,34 @@ Model.polylines = function(rw) {
             ]);
             vs.t = vs.t.concat([0, 0, 1, 0, 1, 1, 0, 1]);
             vs.n = vs.n.concat([l[0] * d, l[1] * d, 1, r[0] * d, r[1] * d, 1, r[0] * d, r[1] * d, 1, l[0] * d, l[1] * d, 1]);
+
+            if (cv) {
+                vs.c = vs.c.concat([
+                    ca[0], ca[1], ca[2],
+                    ca[0], ca[1], ca[2],
+                    cb[0], cb[1], cb[2],
+                    cb[0], cb[1], cb[2]
+                ]);
+            } else {
+                vs.c = vs.c.concat([
+                    -1.0, -1.0, -1.0,
+                    -1.0, -1.0, -1.0,
+                    -1.0, -1.0, -1.0,
+                    -1.0, -1.0, -1.0
+                ]);
+            }
         }
     }
     return vs;
 };
 
-Model.polygons = function(rw) {
+Model.polygons = function(rw, cv) {
     let vs = {
         i: [],
         p: [],
         t: [],
-        n: []
+        n: [],
+        c: []
     };
     let cnt = 0;
     let tmpmax = [];
@@ -217,13 +268,21 @@ Model.polygons = function(rw) {
         let p = rw[i].map(function(a) {
             return a.slice(0);
         });
+        let c;
+
+        if (cv) {
+            c = cv[i].map(function(a) {
+                return a.slice(0);
+            })[0];
+        }
+
         while (p.length > 2) {
             let e = Model.ear(p);
             p.splice(e[0], 1);
             vs.i = vs.i.concat([cnt + 1, cnt, cnt + 2]);
             if (e[1][2] !== undefined && e[2][2] !== undefined && e[3][2] !== undefined) {
                 vs.p = vs.p.concat([e[1][0], e[1][1], e[1][2], e[2][0], e[2][1], e[2][2], e[3][0], e[3][1], e[3][2]]);
-                let n = Vector.snormal(new Vector(e[3]), new Vector(e[2]), new Vector(e[1]));
+                let n = Vector.normalize(Vector.snormal(new Vector(e[3]), new Vector(e[2]), new Vector(e[1])));
                 vs.n = vs.n.concat([n.x(), n.y(), n.z(), n.x(), n.y(), n.z(), n.x(), n.y(), n.z()]);
             } else {
                 vs.p = vs.p.concat([e[1][0], e[1][1], 0.0, e[2][0], e[2][1], 0.0, e[3][0], e[3][1], 0.0]);
@@ -237,6 +296,13 @@ Model.polygons = function(rw) {
                 map(e[3][0], minx, maxx, 0, tx),
                 map(e[3][1], miny, maxy, 0, ty)
             ]);
+
+            if (c) {
+                vs.c = vs.c.concat([c[0], c[1], c[2], c[0], c[1], c[2], c[0], c[1], c[2]]);
+            } else {
+                vs.c = vs.c.concat([-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]);
+            }
+
             cnt += 3;
         }
     }

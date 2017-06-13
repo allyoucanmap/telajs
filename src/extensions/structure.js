@@ -14,10 +14,10 @@ const structure = {
         now: () => {}
     },
     pause: {
-        now: () => {}
+        now: () => {} // not implemented yet
     },
     resize: {
-        now: () => {}
+        now: () => {} // not implemented yet
     },
     events: {
         click: () => {},

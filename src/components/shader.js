@@ -12,7 +12,7 @@ const Shader = function(p, optns = {}) {
 
     this.name = '_';
 
-    if (options.n) {
+    if (options.n !== undefined) {
         this.name = options.n;
     }
 
@@ -32,6 +32,9 @@ const Shader = function(p, optns = {}) {
     }, {
         pos: 2,
         name: 'n'
+    }, {
+        pos: 3,
+        name: 'c'
     }];
 
     this.uniforms = {
@@ -109,7 +112,7 @@ const Shader = function(p, optns = {}) {
 };
 
 Shader.prototype.load = function(n, v) {
-    if (this.uniforms[n]) {
+    if (this.uniforms[n] !== undefined) {
         this.program.load(this.uniforms[n], v);
     }
 };

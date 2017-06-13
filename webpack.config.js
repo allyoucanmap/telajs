@@ -2,15 +2,17 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-    devtool: 'inline-source-map',
+    devtool: 'eval',
+    context: path.join(__dirname, 'src'),
+    target: 'web',
     entry: [
-        'webpack-hot-middleware/client',
-        './src/client.js'
+        'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr&timeout=20000',
+        './client.js'
     ],
     output: {
-        path: path.resolve('./dist'),
+        path: path.join(__dirname, 'www'),
         filename: 'tela.js',
-        publicPath: '/'
+        publicPath: 'http://localhost:3000/assets/'
     },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),

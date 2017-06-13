@@ -1,0 +1,18 @@
+{
+  "source": {
+    "include": [
+      "src/components",
+      "www/docs.md"
+    ]
+  },
+  "templates": {
+    "default": {
+      "outputSourceFiles": false,
+      "staticFiles": {
+        "include": [
+            "./dist"
+        ]
+      }
+    }
+  }
+}

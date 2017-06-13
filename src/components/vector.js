@@ -5,28 +5,28 @@ const Vector = function(vs = [0.0, 0.0, 0.0]) {
 };
 
 Vector.prototype.all = function(vs) {
-    if (vs) {
+    if (vs !== undefined) {
         this.vs = vs;
     }
     return this.vs;
 };
 
 Vector.prototype.x = function(x) {
-    if (x) {
+    if (x !== undefined) {
         this.vs[0] = x;
     }
     return this.vs[0];
 };
 
 Vector.prototype.y = function(y) {
-    if (y) {
+    if (y !== undefined) {
         this.vs[1] = y;
     }
     return this.vs[1];
 };
 
 Vector.prototype.z = function(z) {
-    if (z) {
+    if (z !== undefined) {
         this.vs[2] = z;
     }
     return this.vs[2];
