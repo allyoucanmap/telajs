@@ -23,14 +23,14 @@ ShaderProgram.prototype.set = function() {
     this.gl.attachShader(this.prsid, this.vxsid);
     this.gl.attachShader(this.prsid, this.ftsid);
     for (let a in this.s.attributes) {
-        if (this.s.attributes[a]) {
+        if (this.s.attributes[a] !== undefined) {
             this.gl.bindAttribLocation(this.prsid, this.s.attributes[a].pos, this.s.attributes[a].name);
         }
     }
     this.gl.linkProgram(this.prsid);
     this.gl.validateProgram(this.prsid);
     for (let u in this.s.uniforms) {
-        if (this.s.uniforms[u]) {
+        if (this.s.uniforms[u] !== undefined) {
             this.locations[this.s.uniforms[u].name] = this.gl.getUniformLocation(this.prsid, this.s.uniforms[u].name);
         }
     }

@@ -40,7 +40,7 @@ body
 }
 
 a, a:visited, a:active {
-    color: #0095dd;
+    color: #55ccaa;
     text-decoration: none;
 }
 
@@ -75,7 +75,7 @@ tt, code, kbd, samp {
 }
 
 article dl {
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
 }
 
 section
@@ -121,7 +121,7 @@ nav ul {
 nav ul a, nav ul a:visited, nav ul a:active {
     font-family: Consolas, Monaco, 'Andale Mono', monospace;
     line-height: 18px;
-    color: #4D4E53;
+    color: #aa55cc;
 }
 
 nav h3 {
@@ -148,7 +148,7 @@ h1, h2, h3, h4 {
 h1
 {
     font-family: 'Open Sans Light', sans-serif;
-    font-size: 48px;
+    font-size: 32px;
     letter-spacing: -2px;
     margin: 12px 24px 20px;
 }
@@ -156,9 +156,11 @@ h1
 h2, h3.subsection-title
 {
     font-size: 30px;
-    font-weight: 700;
     letter-spacing: -1px;
-    margin-bottom: 12px;
+    margin-bottom: 0;
+    margin-top: 60px;
+    color: #55aacc;
+    font-weight: lighter;
 }
 
 h3
@@ -213,6 +215,7 @@ thead tr
 {
     background-color: #ddd;
     font-weight: bold;
+    display: none;
 }
 
 th { border-right: 1px solid #aaa; }
@@ -246,6 +249,8 @@ tr > th:last-child { border-right: 1px solid #ddd; }
 
 .name, .signature {
     font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    color: #55aacc;
+    margin-top: 50px;
 }
 
 .details { margin-top: 14px; border-left: 2px solid #DDD; }
@@ -274,6 +279,8 @@ tr > th:last-child { border-right: 1px solid #ddd; }
     border: 1px solid #ddd;
     width: 80%;
     overflow: auto;
+    background-color: #333;
+    margin-top: 0;
 }
 
 .prettyprint.source {
@@ -287,7 +294,7 @@ tr > th:last-child { border-right: 1px solid #ddd; }
     display: block;
     padding: 4px 12px;
     margin: 0;
-    background-color: #fff;
+    background-color: #333;
     color: #4D4E53;
 }
 
@@ -351,4 +358,13 @@ tr > th:last-child { border-right: 1px solid #ddd; }
 
 .disabled {
     color: #454545;
+}
+
+.tela-canvas {
+    width: 80%;
+    height: 350px;
+}
+
+td.name code{
+  color: #55aacc;
 }

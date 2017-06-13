@@ -107,15 +107,6 @@ const geovector = {
             if (tela.get('e').dragend) {
                 updateLayers(ext, tela);
             }
-
-            /* let layers = ext.get('layers');
-
-            layers.forEach((layer) => {
-                layer.tiles.forEach((t) => {
-                    // t.ent.ry(45);
-                    console.log(t.ent.sz(t.ent.sz() + 0.1));
-                });
-            }); */
         },
         after: () => {}
     },
@@ -137,7 +128,7 @@ const geovector = {
             const res = ext.get('resolution');
             const sens = ext.get('sensitivity');
             const center = ext.get('center').pseudo;
-            ext.get('center').wgs84 = wgs84([center[0] + p[0] * sens * res, center[1] + p[1] * sens * res]);
+            ext.get('center').wgs84 = wgs84([center[0] - p[0] * sens * res, center[1] + p[1] * sens * res]);
         },
         move: (p, ext) => {
             ext.get('position').px = p;

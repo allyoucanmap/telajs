@@ -2,7 +2,7 @@
   "source": {
     "include": [
       "src/components",
-      "README.md"
+      "www/docs.md"
     ]
   },
   "templates": {

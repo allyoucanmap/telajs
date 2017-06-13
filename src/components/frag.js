@@ -62,6 +62,7 @@ module.exports = "" +
     "brightness = max(dot(normalize(suN + noise), normalize(toL)), 0.4);" +
     "color *= vec4(vec3(brightness), 1.0);" +
   "}" +
+  "color *= vec4(lcolor * brightness, 1.0);" +
   "gl_FragColor = color;" +
 "}"
 ;

@@ -14,14 +14,14 @@ const Matrix = function(mx = identity) {
 };
 
 Matrix.prototype.all = function(mx) {
-    if (mx) {
+    if (mx !== undefined) {
         this.mx = mx;
     }
     return this.mx;
 };
 
 Matrix.prototype.m = function(i, m) {
-    if (m) {
+    if (m !== undefined) {
         this.mx[i] = m;
     }
     return this.mx[i];

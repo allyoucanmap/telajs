@@ -43,28 +43,28 @@ const Render = function(p, options = {}) {
 };
 
 Render.prototype.sky = function(c) {
-    if (c) {
+    if (c !== undefined) {
         this.background.all(c);
     }
     return this.background.all();
 };
 
 Render.prototype.sha = function(sha) {
-    if (sha) {
+    if (sha !== undefined) {
         this.shader = sha;
     }
     return this.shader;
 };
 
 Render.prototype.cam = function(cam) {
-    if (cam) {
+    if (cam !== undefined) {
         this.camera = cam;
     }
     return this.camera;
 };
 
 Render.prototype.lig = function(lig) {
-    if (lig) {
+    if (lig !== undefined) {
         this.light = lig;
     }
     return this.light;
@@ -136,7 +136,7 @@ Render.prototype.update = function(models) {
 Render.prototype.destroy = function(shaders) {
     if (!this.clean) {
         for (let s in shaders.length) {
-            if (shaders[s]) {
+            if (shaders[s] !== undefined) {
                 shaders[s].destroy();
             }
         }

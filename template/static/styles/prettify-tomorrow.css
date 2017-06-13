@@ -4,20 +4,20 @@
 /* SPAN elements with the classes below are added by prettyprint. */
 /* plain text */
 .pln {
-  color: #4d4d4c; }
+  color: #f2f2f2; }
 
 @media screen {
   /* string content */
   .str {
-    color: #718c00; }
+    color: #55ccaa; }
 
   /* a keyword */
   .kwd {
-    color: #8959a8; }
+    color: #aa77cc; }
 
   /* a comment */
   .com {
-    color: #8e908c; }
+    color: #555555; }
 
   /* a type name */
   .typ {
@@ -25,11 +25,11 @@
 
   /* a literal value */
   .lit {
-    color: #f5871f; }
+    color: #55aacc; }
 
   /* punctuation */
   .pun {
-    color: #4d4d4c; }
+    color: #aa55cc; }
 
   /* lisp open bracket */
   .opn {
@@ -41,15 +41,15 @@
 
   /* a markup tag name */
   .tag {
-    color: #c82829; }
+    color: #77ee77; }
 
   /* a markup attribute name */
   .atn {
-    color: #f5871f; }
+    color: #ee77ee; }
 
   /* a markup attribute value */
   .atv {
-    color: #3e999f; }
+    color: #55ccaa; }
 
   /* a declaration */
   .dec {

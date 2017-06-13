@@ -88,11 +88,11 @@ Event.prototype.drag = function(f) {
         this.events.push((e) => {
             if (e.button >= 0 && this.start) {
                 if (f) {
-                    f([this.point[0] - e.clientX - this.bbox.left, e.clientY - this.bbox.top - this.point[1]], e);
+                    f([e.clientX - this.bbox.left - this.point[0], e.clientY - this.bbox.top - this.point[1]], e);
                 }
                 this.extensions.forEach((ext) => {
                     if (ext.data.events && ext.data.events.drag) {
-                        ext.data.events.drag([this.point[0] - e.clientX - this.bbox.left, e.clientY - this.bbox.top - this.point[1]], ext, e);
+                        ext.data.events.drag([e.clientX - this.bbox.left - this.point[0], e.clientY - this.bbox.top - this.point[1]], ext, e);
                     }
                 });
                 this.point = [e.clientX - this.bbox.left, e.clientY - this.bbox.top];

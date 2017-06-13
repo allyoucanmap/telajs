@@ -38,12 +38,21 @@ const Model = function(p, options = {}) {
     };
 
     for (let o in opts) {
-        if (options[o]) {
+        if (options[o] !== undefined) {
             this[opts[o]] = options[o];
         }
     }
 
     switch (this.type) {
+        case 'WGL':
+            this.vs = {
+                i: [0, 1, 2],
+                p: [0.0, p.SQRT3 / 3, 0.0, -0.5, -p.SQRT3 / 6, 0.0, 0.5, -p.SQRT3 / 6, 0.0],
+                t: [0.5, p.SQRT3 / 2, 0.0, 0.0, 1.0, 0.0],
+                n: [0, 0, 1, 0, 0, 1, 0, 0, 1],
+                c: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+            };
+            break;
         case 'EQU':
             this.vs = {
                 i: [0, 1, 2],
@@ -106,7 +115,7 @@ Model.prototype.size = function() {
 };
 
 Model.prototype.ent = function(e) {
-    if (e) {
+    if (e !== undefined) {
         this.entities.push(e);
     }
     return this.entities;
@@ -118,7 +127,7 @@ Model.prototype.bucreate = function() {
     this.bu.p = this.gl.createBuffer();
     this.bu.t = this.gl.createBuffer();
     this.bu.n = this.gl.createBuffer();
-    if (this.vs.c) {
+    if (this.vs.c !== undefined) {
         this.bu.c = this.gl.createBuffer();
     }
 };
@@ -132,7 +141,7 @@ Model.prototype.bubind = function() {
     this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.vs.t), this.gl.STATIC_DRAW);
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.bu.n);
     this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.vs.n), this.gl.STATIC_DRAW);
-    if (this.vs.c) {
+    if (this.vs.c !== undefined) {
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.bu.c);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.vs.c), this.gl.STATIC_DRAW);
     }
@@ -144,7 +153,7 @@ Model.prototype.budelete = function() {
     this.gl.deleteBuffer(this.bu.p);
     this.gl.deleteBuffer(this.bu.t);
     this.gl.deleteBuffer(this.bu.n);
-    if (this.vs.c) {
+    if (this.vs.c !== undefined) {
         this.gl.deleteBuffer(this.bu.c);
         this.bu.c = null;
     }

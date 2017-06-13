@@ -32,9 +32,15 @@ const Camera = function(p, options = {}) {
 
     return this;
 };
-
+/**
+ * updates projection matrix
+ * @function .update
+ * @param {object} options - { ty, fo, as, w, h, z, ne, fa } see camera options above
+ * @instance
+ * @memberof .cam()
+ */
 Camera.prototype.update = function(op) {
-    if (op) {
+    if (op !== undefined) {
         let opts = {
             ty: 'type',
             fo: 'fov',
@@ -46,7 +52,7 @@ Camera.prototype.update = function(op) {
             fa: 'far'
         };
         for (let o in opts) {
-            if (op[o]) {
+            if (op[o] !== undefined) {
                 this[opts[o]] = op[o];
             }
         }
@@ -60,9 +66,15 @@ Camera.prototype.update = function(op) {
         ));
     }
 };
-
+/**
+ * updates view matrix
+ * @function .at
+ * @param {object} options - { p, ta, up } see camera options above
+ * @instance
+ * @memberof .cam()
+ */
 Camera.prototype.at = function(op) {
-    if (op) {
+    if (op !== undefined) {
         let opts = {
             p: 'position',
             ta: 'target',
@@ -78,79 +90,142 @@ Camera.prototype.at = function(op) {
     this.direction = Vector.normalize(Vector.sub(this.target, this.position));
     this.view.all(Matrix.at(this.position.vs, this.target.vs, this.up.vs));
 };
-
+/**
+ * changes position
+ * @function .p
+ * @param {array|number} position - [ number, = , = ] | number
+ * @instance
+ * @memberof .cam()
+ * @returns array - this position
+ */
 Camera.prototype.p = function(p) {
-    if (p) {
+    if (p !== undefined) {
         this.position.all(p);
         this.at();
     }
     return this.position.all();
 };
-
+/**
+ * changes x position
+ * @function .px
+ * @param {number} x
+ * @instance
+ * @memberof .cam()
+ * @returns number - this x position
+ */
 Camera.prototype.px = function(x) {
-    if (x) {
+    if (x !== undefined) {
         this.position.x(x);
         this.at();
     }
     return this.position.x();
 };
-
+/**
+ * changes y position
+ * @function .py
+ * @param {number} y
+ * @instance
+ * @memberof .cam()
+ * @returns number - this y position
+ */
 Camera.prototype.py = function(y) {
-    if (y) {
+    if (y !== undefined) {
         this.position.y(y);
         this.at();
     }
     return this.position.y();
 };
-
+/**
+ * changes z position
+ * @function .pz
+ * @param {number} z
+ * @instance
+ * @memberof .cam()
+ * @returns number - this z position
+ */
 Camera.prototype.pz = function(z) {
-    if (z) {
+    if (z !== undefined) {
         this.position.z(z);
         this.at();
     }
     return this.position.z();
 };
-
+/**
+ * changes target
+ * @function .ta
+ * @param {array} target - [ number, = , = ]
+ * @instance
+ * @memberof .cam()
+ * @returns number - this target
+ */
 Camera.prototype.ta = function(ta) {
-    if (ta) {
+    if (ta !== undefined) {
         this.target.all(ta);
         this.at();
     }
     return this.target.all();
 };
-
+/**
+ * changes fov
+ * @function .fo
+ * @param {number} fov
+ * @instance
+ * @memberof .cam()
+ * @returns number - this fov
+ */
 Camera.prototype.fo = function(fo) {
     if (this.type !== 'p') {
         return null;
     }
-    if (fo) {
+    if (fo !== undefined) {
         this.fov = fo;
         this.update();
     }
     return this.fov;
 };
-
+/**
+ * changes zoom (only type ortho)
+ * @function .z
+ * @param {number} zoom
+ * @instance
+ * @memberof .cam()
+ * @returns number - this zoom
+ */
 Camera.prototype.z = function(z) {
     if (this.type !== 'o') {
         return null;
     }
-    if (z) {
+    if (z !== undefined) {
         this.zoom = z;
         this.update();
     }
     return this.zoom;
 };
-
+/**
+ * changes near plane position
+ * @function .ne
+ * @param {number} near
+ * @instance
+ * @memberof .cam()
+ * @returns number - this near position
+ */
 Camera.prototype.ne = function(ne) {
-    if (ne) {
+    if (ne !== undefined) {
         this.near = ne;
         this.update();
     }
     return this.near;
 };
-
+/**
+ * changes far plane position
+ * @function .fa
+ * @param {number} far
+ * @instance
+ * @memberof .cam()
+ * @returns number - this far position
+ */
 Camera.prototype.fa = function(fa) {
-    if (fa) {
+    if (fa !== undefined) {
         this.far = fa;
         this.update();
     }
