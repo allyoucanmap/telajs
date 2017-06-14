@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>tela.on()</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">tela.on()</h1>
+
+    
+
+
+
+
+<section>
+
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Adds a new Event
+<pre class="prettyprint">
+<code>
+tela.on('click', function(p, e) {
+ // p -> position [x, y]
+ // e -> click event
+});
+
+tela.on('move', function(p, e) {
+ // p -> position [x, y]
+ // e -> mousemove event
+});
+
+tela.on('scroll', function(sc, p, e) {
+ // sc -> scroll -1 or 1
+ // p -> position [x, y]
+ // e -> mousewheel event
+});
+
+tela.on('drag', function(d, e) {
+ // d -> delta [dx, dy]
+ // e -> mousemove event
+});
+</code>
+</pre></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+            
+    <script language="javascript" type="text/javascript" src="./tela.js"></script>
+<canvas id="tela" class="tela-canvas" ></canvas>
+<script language="javascript" type="text/javascript">
+
+ var direction = 1;
+
+ tela.set('tela');
+ tela.resize();
+
+ var width = tela.get('w');
+
+ var triangle = tela.ent({
+   s: 3,
+   mod: tela.mod({ ty: 'EQU' })
+ })
+
+ tela.play(function() {
+   triangle.rz(triangle.rz() + 4.0 * direction);
+ });
+
+ tela.on('move', function(p) {
+   if (p[0] > width/2) {
+     direction = -1.0;
+   } else {
+     direction = 1.0;
+   }
+ });
+
+ tela.on('click', function() {
+   triangle.s([Math.random() + 2, Math.random() + 2, Math.random() + 2]);
+ });
+
+ tela.on('drag', function(p) {
+   triangle.p([p[0], p[1], 0]);
+ });
+
+ tela.on('scroll', function() {
+   triangle.c([Math.random(), Math.random(), Math.random()]);
+ });
+
+</script>
+    <pre class="prettyprint"><code>&lt;script language="javascript" type="text/javascript" src="./tela.js">&lt;/script>
+&lt;canvas id="tela" class="tela-canvas" >&lt;/canvas>
+&lt;script language="javascript" type="text/javascript">
+
+ var direction = 1;
+
+ tela.set('tela');
+ tela.resize();
+
+ var width = tela.get('w');
+
+ var triangle = tela.ent({
+   s: 3,
+   mod: tela.mod({ ty: 'EQU' })
+ })
+
+ tela.play(function() {
+   triangle.rz(triangle.rz() + 4.0 * direction);
+ });
+
+ tela.on('move', function(p) {
+   if (p[0] > width/2) {
+     direction = -1.0;
+   } else {
+     direction = 1.0;
+   }
+ });
+
+ tela.on('click', function() {
+   triangle.s([Math.random() + 2, Math.random() + 2, Math.random() + 2]);
+ });
+
+ tela.on('drag', function(p) {
+   triangle.p([p[0], p[1], 0]);
+ });
+
+ tela.on('scroll', function() {
+   triangle.c([Math.random(), Math.random(), Math.random()]);
+ });
+
+&lt;/script></code></pre>
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">tela</a></h2><h3></h3><ul><li><a href="cam.html">.cam()</a></li><li><a href="ent.html">.ent()</a></li><li><a href="lig.html">.lig()</a></li><li><a href="mod.html">.mod()</a></li><li><a href="on.html">.on()</a></li><li><a href="pause.html">.pause()</a></li><li><a href="play.html">.play()</a></li><li><a href="resize.html">.resize()</a></li><li><a href="set.html">.set()</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    <a href="https://twitter.com/allyoucanmap">@allyoucanmap</a> stefano bovio
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

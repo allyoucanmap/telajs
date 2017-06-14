@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>tela.cam()</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">tela.cam()</h1>
+
+    
+
+
+
+
+<section>
+
+
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Adds a new Camera
+<pre class="prettyprint">
+<code>
+var options = {
+ ty: 'p', // type
+ fo: 70.0, // fov
+ as: 512 / 256, // aspect
+ w: 512, // width
+ h: 256, // height
+ z: 100, // zoom (ty: 'o')
+ ne: 0.5, // near
+ fa: 1000, // far
+ p: [1.0, 1.0, 1.0], // postion
+ ta: [0.0, 0.0, 0.0], // target
+ up: [0.0, 1.0, 0.0] // up
+};
+
+tela.cam(options);
+</code>
+</pre></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+            
+    <script language="javascript" type="text/javascript" src="./tela.js"></script>
+<canvas id="tela" class="tela-canvas" ></canvas>
+<script language="javascript" type="text/javascript">
+
+ var change = false;
+
+ tela.set('tela');
+ tela.resize();
+
+ var cam = tela.cam({
+   ty: 'o',
+   p: [0.0, 0.0, 3.0]
+ });
+
+ var roofModel = tela.mod({
+   ty: 'PLG',
+   raw: [
+     [
+       [-0.5, 0.5, 0.5],
+       [0.0, 1.0, 0.5],
+       [0.5, 0.5, 0.5]
+     ],
+     [
+       [0.5, 0.5, -0.5],
+       [0.0, 1.0, -0.5],
+       [-0.5, 0.5, -0.5]
+     ],
+     [
+       [0.5, 0.5, 0.5],
+       [0.0, 1.0, 0.5],
+       [0.0, 1.0, -0.5],
+       [0.5, 0.5, -0.5]
+     ],
+     [
+       [-0.5, 0.5, 0.5],
+       [-0.5, 0.5, -0.5],
+       [0.0, 1.0, -0.5],
+       [0.0, 1.0, 0.5]
+     ]
+   ]
+ });
+
+ var roof = tela.ent({
+   c: [0.95, 0.2, 0.2],
+   mod: roofModel
+ });
+
+ var wall = tela.ent({
+   c: [0.95, 0.95, 0.95],
+   mod: tela.mod({
+     ty: 'CUB'
+   })
+ });
+
+ tela.play(function() {
+   roof.ry(roof.ry() + 1);
+   wall.ry(wall.ry() + 1);
+ });
+
+ tela.on('click', function() {
+   change = !change;
+   if(change)  {
+     cam.update({ ty: 'p' });
+   } else {
+     cam.update({ ty: 'o' });
+   }
+ });
+
+</script>
+    <pre class="prettyprint"><code>&lt;script language="javascript" type="text/javascript" src="./tela.js">&lt;/script>
+&lt;canvas id="tela" class="tela-canvas" >&lt;/canvas>
+&lt;script language="javascript" type="text/javascript">
+
+ var change = false;
+
+ tela.set('tela');
+ tela.resize();
+
+ var cam = tela.cam({
+   ty: 'o',
+   p: [0.0, 0.0, 3.0]
+ });
+
+ var roofModel = tela.mod({
+   ty: 'PLG',
+   raw: [
+     [
+       [-0.5, 0.5, 0.5],
+       [0.0, 1.0, 0.5],
+       [0.5, 0.5, 0.5]
+     ],
+     [
+       [0.5, 0.5, -0.5],
+       [0.0, 1.0, -0.5],
+       [-0.5, 0.5, -0.5]
+     ],
+     [
+       [0.5, 0.5, 0.5],
+       [0.0, 1.0, 0.5],
+       [0.0, 1.0, -0.5],
+       [0.5, 0.5, -0.5]
+     ],
+     [
+       [-0.5, 0.5, 0.5],
+       [-0.5, 0.5, -0.5],
+       [0.0, 1.0, -0.5],
+       [0.0, 1.0, 0.5]
+     ]
+   ]
+ });
+
+ var roof = tela.ent({
+   c: [0.95, 0.2, 0.2],
+   mod: roofModel
+ });
+
+ var wall = tela.ent({
+   c: [0.95, 0.95, 0.95],
+   mod: tela.mod({
+     ty: 'CUB'
+   })
+ });
+
+ tela.play(function() {
+   roof.ry(roof.ry() + 1);
+   wall.ry(wall.ry() + 1);
+ });
+
+ tela.on('click', function() {
+   change = !change;
+   if(change)  {
+     cam.update({ ty: 'p' });
+   } else {
+     cam.update({ ty: 'o' });
+   }
+ });
+
+&lt;/script></code></pre>
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="at">.<span class="type-signature"></span>at<span class="signature">(options)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    updates view matrix
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">{ p, ta, up } see camera options above</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="fa">.<span class="type-signature"></span>fa<span class="signature">(far)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    changes far plane position
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>far</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number - this far position
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="fo">.<span class="type-signature"></span>fo<span class="signature">(fov)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    changes fov
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fov</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number - this fov
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="ne">.<span class="type-signature"></span>ne<span class="signature">(near)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    changes near plane position
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>near</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number - this near position
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="p">.<span class="type-signature"></span>p<span class="signature">(position)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    changes position
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>position</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+|
+
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">[ number, = , = ] | number</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    array - this position
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="px">.<span class="type-signature"></span>px<span class="signature">(x)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    changes x position
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number - this x position
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="py">.<span class="type-signature"></span>py<span class="signature">(y)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    changes y position
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number - this y position
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="pz">.<span class="type-signature"></span>pz<span class="signature">(z)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    changes z position
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>z</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number - this z position
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="ta">.<span class="type-signature"></span>ta<span class="signature">(target)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    changes target
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>target</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">[ number, = , = ]</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number - this target
+</div>
+
+
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="update">.<span class="type-signature"></span>update<span class="signature">(options)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    updates projection matrix
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">{ ty, fo, as, w, h, z, ne, fa } see camera options above</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="z">.<span class="type-signature"></span>z<span class="signature">(zoom)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    changes zoom (only type ortho)
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>zoom</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    number - this zoom
+</div>
+
+
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">tela</a></h2><h3></h3><ul><li><a href="cam.html">.cam()</a></li><li><a href="ent.html">.ent()</a></li><li><a href="lig.html">.lig()</a></li><li><a href="mod.html">.mod()</a></li><li><a href="on.html">.on()</a></li><li><a href="pause.html">.pause()</a></li><li><a href="play.html">.play()</a></li><li><a href="resize.html">.resize()</a></li><li><a href="set.html">.set()</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    <a href="https://twitter.com/allyoucanmap">@allyoucanmap</a> stefano bovio
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
